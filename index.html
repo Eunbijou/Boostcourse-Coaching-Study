@@ -12,60 +12,94 @@
 	</style>
 </head>
 <body>
+	<!-- 
+    문제 풀이 순서 : 
+      1. 총 9개의 열과 5개의 행의 표가 만들어야한다. table 태그안에 tr태그*9개, 각 tr태그 안에 td태그*5개를 만든다.
+      2. 표의 제목을 입력 caption 태그 사이이 제목을 입력한다.
+      3. 표의 제목 행을 그룹하기 위해 thead태그로 첫번째 tr태그를 thead태그로 묶어주고 tr태그 아래의 td태그를 th태그로 작성한다.(th태그는 제목셀을 작성할때 쓰는 태그)
+      4. 나머지 tr태그 부분은 표의 본문 행임으로 tbody태그로 그룹화 해준다.
+      + 다른 세부적인 내용은 아래서 설명...
+    -->
 	<table>
+		<!-- 표의 제목 -->
 		<caption>콜레스테롤 검사의 정상범위</caption>
+		<!-- 표의 제목 행을 그룹화-->
 		<thead>
 			<tr>
-				<th>검사항목</th>
-				<th colspan="4">양호 <--------------> 높음</th>
+				<!-- 제목셀로 td태그를 th태그로 변경, 제목셀에서 동일한 열에 있는 내용 셀과 연관성이 있기 때문에 scope속성과 값을 col로 작성-->
+				<th scope="col">검사항목</th>
+				<!-- 해당 셀이 행의 4개의 영역을 차지하기 때문에 합쳐줌, 코드에서 특수문자를 그냥 입력할 경우 오류가 날 수 있음으로 문자로 대체, 제목셀에서 동일한 열에 있는 내용 셀과 연관성이 있기 때문에 scope속성과 값을 col로 작성-->
+				<th scope="colgroup" colspan="4">양호 &lt;--------------&gt; 높음</th>
 			</tr>
 		</thead>
+		<!-- 표의 본문 행을 그룹화 -->
 		<tbody>
+			<!-- 첫번쨰 항목: 콜레스트롤 -->
 			<tr>
-				<td rowspan="2">콜레스테롤</th>
-				<td colspan="2">정상</td>
-				<td>경계</td>
-				<td>높음</td>
+				<!--첫번째 항목은 행의 제목임으로 th태그로 작성, 그 뒤 항목은 td태그로 순위를 낮춰줌 scope="row"를 설정해 콜레스트롤 다음 정상이 읽히도록 함-->
+				<td scope="row" rowspan="2">콜레스테롤</th>
+				<!-- <td></td> 두칸을 차지하는 형태를 보임으로 colspan="2" 속성 사용, 해당 셀 아래에 있는 tr태그의 200이 읽히도록 scope="col"을 작성 -->
+				<td scope="col" colspan="2">정상</td>
+				<!-- 위와 같은 이유로 작성됨 -->
+				<td scope="col">경계</td>
+				<td scope="col">높음</td>
 			</tr>
 			<tr>
-				<td colspan="2"><200</td>
+				<!-- <th></th> 위의 콜레스트롤이 적인 th태그와 합쳐짐 -->
+        <!-- <td></td> 위에 있는 정상과 같은 범위를 유지하기 위해 colspan="2" 속성 사용-->
+				<td colspan="2">&lt;200</td>
 				<td>200~239</td>
-				<td>>=240</td>
+				<td>&gt;=240</td>
+			</tr>
+			<!-- 첫번째 항목후 비슷한 형식으로 작성되었으며 셀이 합쳐지는 요소들만 달라짐,
+				두번째 항목 : 중성지방 -->
+			<tr>
+				<td scope="row" rowspan="2">중성지방</th>
+				<!-- <td></td> -->
+				<td scope="col" colspan="2">정상</td>
+				<td scope="col">경계</td>
+				<td scope="col">높음</td>
 			</tr>
 			<tr>
-				<td rowspan="2">중성지방</th>
-				<td colspan="2">정상</td>
-				<td>경계</td>
-				<td>높음</td>
-			</tr>
-			<tr>
-				<td colspan="2"><150</td>
+				<!-- 
+          <th></th>
+          <td></td> 
+        -->
+				<td colspan="2">&lt;150</td>
 				<td>150~199</td>
 				<td>200~499</td>
 			</tr>
+			<!-- 세번째 항목 : LDL콜레스트롤-->
 			<tr>
-				<td rowspan="2">LDL콜레스테롤</th>
-				<td>양호</td>
-				<td>높은정상</td>
-				<td>경계</td>
-				<td>높음</td>
+				<td scope="row" rowspan="2">LDL콜레스테롤</th>
+				<td scope="col">양호</td>
+				<td scope="col">높은정상</td>
+				<td scope="col">경계</td>
+				<td scope="col">높음</td>
 			</tr>
 			<tr>
-				<td><100</td>
+				<!-- <th></th> -->
+				<td>&lt;100</td>
 				<td>100~129</td>
 				<td>130~159</td>
 				<td>160~189</td>
 			</tr>
+			<!-- 네번째 항목 : HDL콜레스트롤-->
 			<tr>
-				<td rowspan="2">HDL콜레스테롤</th>
-				<td colspan="2">높음</td>
-				<td>-</td>
-				<td>낮음</td>
+				<td scope="row" rowspan="2">HDL콜레스테롤</th>
+				<!-- <td></td> -->
+				<td scope="col" colspan="2">높음</td>
+				<td scope="col">-</td>
+				<td scope="col">낮음</td>
 			</tr>
 			<tr>
-				<td colspan="2"><600</td>
+				<!-- 
+          <th></th>
+          <td></td> 
+        -->
+				<td colspan="2">&lt;600</td>
 				<td>-</td>
-				<td><40</td>
+				<td>&lt;40</td>
 			</tr>
 		</tbody>
 </table>
